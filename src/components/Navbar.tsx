@@ -43,8 +43,41 @@ const Navbar = () => {
   return (
     <>
       <div className="header">
-        <a href="/#" className="navbar-title" data-cursor="disable">
-          FAHIM
+        <a
+          href="/#"
+          className="brand-badge-container"
+          data-cursor="disable"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "10px",
+            cursor: "pointer",
+          }}
+        >
+          <div
+            style={{
+              width: "28px",
+              height: "28px",
+              borderRadius: "50%",
+              overflow: "hidden",
+              border: "1.5px solid rgba(147, 51, 234, 0.6)",
+              boxShadow: "0 0 10px rgba(147, 51, 234, 0.4)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+              background: "#000",
+            }}
+          >
+            <img
+              src="/images/hacker-logo.png"
+              alt="Cyber Badge"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </div>
+          <span style={{ fontWeight: 700, fontSize: "0.95rem", letterSpacing: "1px" }}>
+            FAHIM
+          </span>
         </a>
         <a
           href="mailto:rfahimahmed2023@gmail.com"
