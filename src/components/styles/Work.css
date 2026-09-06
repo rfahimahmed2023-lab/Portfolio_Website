@@ -1,13 +1,13 @@
 .work-section {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: var(--vh);
   box-sizing: border-box;
   overflow: hidden;
   background-color: #000;
   transition: 0s;
   will-change: transform;
-  touch-action: pan-y;
+  touch-action: pan-y !important;
 }
 
 .work-section h2 {
@@ -39,7 +39,7 @@
   position: relative;
   border-top: 1px solid #363636;
   border-bottom: 1px solid #363636;
-  touch-action: pan-y;
+  touch-action: pan-y !important;
 }
 
 .work-box {
@@ -190,6 +190,23 @@
   .work-flex {
     margin-left: -30px;
     padding-right: 45px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* Horizontal pin-scroll stays active on mobile: lock the track to a
+     rigid row so no narrower breakpoint can ever stack the cards. */
+  .work-flex {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    width: max-content !important;
+  }
+
+  .work-box {
+    width: 85vw !important;
+    flex-shrink: 0 !important;
+    padding: 24px;
   }
 }
 
