@@ -27,8 +27,14 @@ export const LoadingProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {}, [loading]);
 
   useEffect(() => {
-    document.documentElement.style.overflow = isLoading ? "hidden" : "";
-    document.body.style.overflow = isLoading ? "hidden" : "";
+    if (isLoading) {
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      window.scrollTo(0, 0);
+    } else {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    }
   }, [isLoading]);
 
   return (
