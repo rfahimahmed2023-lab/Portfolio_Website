@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import "./styles/Loading.css";
 import { useLoading } from "../context/LoadingProvider";
 
-import Marquee from "react-fast-marquee";
+const MARQUEE_TEXT =
+  "ROOT SHELL ACCESS // ZERO-TRUST VERIFICATION // THREAT HUNTING DEPLOYED // FORENSICS CORE // OFFENSIVE TELEMETRY // INCIDENT RESPONSE // ";
 
 const Loading = ({ percent }: { percent: number }) => {
   const { setIsLoading } = useLoading();
@@ -47,39 +48,18 @@ const Loading = ({ percent }: { percent: number }) => {
       <div className="loading-header">
         <a
           href="/#"
-          className="brand-badge-container"
+          className="loader-title"
           data-cursor="disable"
           style={{
             display: "inline-flex",
             alignItems: "center",
-            gap: "10px",
             cursor: "pointer",
+            color: "#FFFFFF",
+            fontWeight: 700,
+            letterSpacing: "1.5px",
           }}
         >
-          <div
-            style={{
-              width: "28px",
-              height: "28px",
-              borderRadius: "50%",
-              overflow: "hidden",
-              border: "1.5px solid rgba(147, 51, 234, 0.6)",
-              boxShadow: "0 0 10px rgba(147, 51, 234, 0.4)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-              background: "#000",
-            }}
-          >
-            <img
-              src="/images/hacker-logo.png"
-              alt="Cyber Badge"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
-          </div>
-          <span style={{ fontWeight: 700, fontSize: "0.95rem", letterSpacing: "1px" }}>
-            AHMED
-          </span>
+          FAHIM AHMED RAFI
         </a>
         <div className={`loaderGame ${clicked && "loader-out"}`}>
           <div className="loaderGame-container">
@@ -93,11 +73,32 @@ const Loading = ({ percent }: { percent: number }) => {
         </div>
       </div>
       <div className="loading-screen">
-        <div className="loading-marquee">
-          <Marquee>
-            <span> A Creative Developer</span> <span>A Creative Designer</span>
-            <span> A Creative Developer</span> <span>A Creative Designer</span>
-          </Marquee>
+        <div
+          className="loader-marquee-wrapper"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: 0,
+            width: "100%",
+            transform: "translateY(-50%)",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            pointerEvents: "none",
+            zIndex: 1,
+          }}
+        >
+          <div
+            className="loader-marquee-track"
+            style={{
+              display: "inline-flex",
+              willChange: "transform",
+            }}
+          >
+            <span className="marquee-content">{MARQUEE_TEXT}</span>
+            <span className="marquee-content" aria-hidden="true">
+              {MARQUEE_TEXT}
+            </span>
+          </div>
         </div>
         <div
           className={`loading-wrap ${clicked && "loading-clicked"}`}
