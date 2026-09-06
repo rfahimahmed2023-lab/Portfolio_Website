@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MdArrowOutward } from "react-icons/md";
 
 interface Props {
@@ -10,34 +10,51 @@ interface Props {
 
 const WorkImage = (props: Props) => {
   const [isVideo, setIsVideo] = useState(false);
-  const [video, setVideo] = useState("");
+  const [videoUrl, setVideoUrl] = useState<string>("");
+
   const handleMouseEnter = async () => {
-    if (props.video) {
+    if (props.video && !videoUrl) {
+      try {
+        const response = await fetch(`src/assets/${props.video}`);
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        setVideoUrl(blobUrl);
+        setIsVideo(true);
+      } catch (err) {
+        console.error("Error loading video preview:", err);
+      }
+    } else if (props.video) {
       setIsVideo(true);
-      const response = await fetch(`src/assets/${props.video}`);
-      const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      setVideo(blobUrl);
     }
   };
+
+  // Revoke object URL on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (videoUrl) {
+        URL.revokeObjectURL(videoUrl);
+      }
+    };
+  }, [videoUrl]);
 
   return (
     <div className="work-image">
       <a
         className="work-image-in"
-        href={props.link}
+        href={props.link || "#"}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={() => setIsVideo(false)}
         target="_blank"
+        rel="noopener noreferrer"
         data-cursor={"disable"}
       >
-        {props.link && (
-          <div className="work-link">
-            <MdArrowOutward />
-          </div>
+        <div className="work-link">
+          <MdArrowOutward />
+        </div>
+        <img src={props.image} alt={props.alt || "Project preview"} loading="lazy" />
+        {isVideo && videoUrl && (
+          <video src={videoUrl} autoPlay muted playsInline loop></video>
         )}
-        <img src={props.image} alt={props.alt} />
-        {isVideo && <video src={video} autoPlay muted playsInline loop></video>}
       </a>
     </div>
   );

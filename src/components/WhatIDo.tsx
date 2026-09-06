@@ -7,6 +7,7 @@ const WhatIDo = () => {
   const setRef = (el: HTMLDivElement | null, index: number) => {
     containerRef.current[index] = el;
   };
+
   useEffect(() => {
     if (ScrollTrigger.isTouch) {
       containerRef.current.forEach((container) => {
@@ -24,6 +25,7 @@ const WhatIDo = () => {
       });
     };
   }, []);
+
   return (
     <div className="whatIDO">
       <div className="what-box">
@@ -87,24 +89,23 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>DEVELOP</h3>
+              <h3>SECURITY & FORENSICS</h3>
               <h4>Description</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae.
+                Specializing in digital artifact extraction, memory forensics, incident response, network traffic analysis, and red-team penetration testing.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">Three.js</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Css</div>
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">Express.js</div>
-                <div className="what-tags">PHP</div>
-                <div className="what-tags">MySql</div>
+                <div className="what-tags">Digital Forensics</div>
+                <div className="what-tags">Volatility (RAM)</div>
+                <div className="what-tags">Autopsy / Sleuth Kit</div>
+                <div className="what-tags">Wireshark</div>
+                <div className="what-tags">Cisco Packet Tracer</div>
+                <div className="what-tags">YARA & Ghidra</div>
+                <div className="what-tags">Nmap & Recon</div>
+                <div className="what-tags">Burp Suite</div>
+                <div className="what-tags">Linux / Bash</div>
+                <div className="what-tags">TryHackMe Labs</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -128,22 +129,23 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>DESIGN</h3>
+              <h3>DEVELOPMENT & DATA ANALYTICS</h3>
               <h4>Description</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae
+                Engineering performant web dashboards, security automation scripts, database schemas, and data pipelines with modern cloud tooling.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Blender</div>
-                <div className="what-tags">Zbrush</div>
-                <div className="what-tags">UI Design</div>
-                <div className="what-tags">Motion</div>
-                <div className="what-tags">Rigging</div>
-                <div className="what-tags">3D Animation</div>
-                <div className="what-tags">Character Design</div>
-                <div className="what-tags">Modelling</div>
+                <div className="what-tags">Python</div>
+                <div className="what-tags">TypeScript</div>
+                <div className="what-tags">React</div>
+                <div className="what-tags">Node.js</div>
+                <div className="what-tags">SQL & Databases</div>
+                <div className="what-tags">AWS Cloud</div>
+                <div className="what-tags">Microsoft Power BI</div>
+                <div className="what-tags">Docker</div>
+                <div className="what-tags">REST APIs</div>
+                <div className="what-tags">Git & GitHub</div>
               </div>
               <div className="what-arrow"></div>
             </div>
