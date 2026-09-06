@@ -76,7 +76,7 @@ const Navbar = () => {
             />
           </div>
           <span style={{ fontWeight: 700, fontSize: "0.95rem", letterSpacing: "1px" }}>
-            FAHIM
+            FAHIM R.
           </span>
         </a>
         <a
