@@ -10,6 +10,8 @@ import { LoadingProvider } from "./context/LoadingProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
+export let lenisInstance: Lenis | undefined;
+
 const App = () => {
   useEffect(() => {
     const lenis = new Lenis({
@@ -20,6 +22,7 @@ const App = () => {
       smoothWheel: true,
       touchMultiplier: 1.5,
     });
+    lenisInstance = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -33,6 +36,7 @@ const App = () => {
     return () => {
       gsap.ticker.remove(update);
       lenis.destroy();
+      lenisInstance = undefined;
     };
   }, []);
 
