@@ -77,10 +77,8 @@ const Loading = ({ percent }: { percent: number }) => {
           className="loader-marquee-wrapper"
           style={{
             position: "absolute",
-            top: "50%",
             left: 0,
             width: "100%",
-            transform: "translateY(-50%)",
             overflow: "hidden",
             whiteSpace: "nowrap",
             pointerEvents: "none",

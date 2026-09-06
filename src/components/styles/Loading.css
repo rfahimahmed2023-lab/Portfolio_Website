@@ -284,6 +284,16 @@
   transform: translateY(10px);
   animation-timing-function: cubic-bezier(0.3, 1.18, 0.63, 1.28);
 }
+.loader-marquee-wrapper {
+  top: auto !important;
+  bottom: 12% !important;
+  transform: none !important;
+}
+@media (max-width: 768px) {
+  .loader-marquee-wrapper {
+    bottom: 15% !important;
+  }
+}
 @keyframes loaderMarquee {
   0% {
     transform: translateX(0);
