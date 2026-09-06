@@ -4,6 +4,9 @@
   margin: auto;
   position: relative;
   height: var(--vh);
+  min-height: 100dvh !important;
+  height: 100dvh !important;
+  overflow: hidden;
 }
 .landing-container {
   width: var(--cWidth);
@@ -358,6 +361,16 @@ h2.landing-info-h2 {
 }
 
 @media only screen and (max-width: 768px) {
+  .landing-section {
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+    overflow: hidden !important;
+  }
+  .landing-intro,
+  .landing-info {
+    position: absolute;
+    max-height: 100%;
+  }
   /* Keep the hero headings clear of the character's face: push the intro
      up near the top edge and the specialization text down near the
      bottom edge instead of both hovering around vertical center. */

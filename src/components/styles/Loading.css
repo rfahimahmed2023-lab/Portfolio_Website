@@ -1,10 +1,13 @@
 .loading-screen {
-  position: fixed;
-  width: 100vw;
-  height: var(--vh);
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100vh !important; /* fallback */
+  height: 100dvh !important;
   /* background-image: linear-gradient(#cbb1ff, #d8c4ff); */
   background-color: #eae5ec;
-  z-index: 999999999;
+  z-index: 999999 !important;
+  overflow: hidden !important;
   display: flex;
   place-items: center;
   justify-content: center;
