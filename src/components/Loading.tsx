@@ -78,7 +78,7 @@ const Loading = ({ percent }: { percent: number }) => {
             />
           </div>
           <span style={{ fontWeight: 700, fontSize: "0.95rem", letterSpacing: "1px" }}>
-            FAHIM R.
+            AHMED
           </span>
         </a>
         <div className={`loaderGame ${clicked && "loader-out"}`}>
