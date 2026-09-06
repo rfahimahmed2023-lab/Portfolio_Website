@@ -25,9 +25,20 @@ const Navbar = () => {
         }
       });
     });
-    window.addEventListener("resize", () => {
+    // Mobile browsers fire `resize` when the address bar shows/hides during
+    // scroll (height-only change). Only force a refresh on real width
+    // changes, otherwise it thrashes and breaks any active pin mid-scroll.
+    let lastWidth = window.innerWidth;
+    const handleResize = () => {
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
       ScrollTrigger.refresh(true);
-    });
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
   return (
     <>

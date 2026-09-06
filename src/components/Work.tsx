@@ -59,12 +59,10 @@ const Work = () => {
 
     if (!workSection || !workFlex || !boxes.length) return;
 
-    // Calculate the exact horizontal travel distance based on actual rendered card width
-    const getDistance = () => {
-      const cardWidth = boxes[0].offsetWidth;
-      const totalWidth = cardWidth * boxes.length;
-      return Math.max(0, totalWidth - window.innerWidth + 160);
-    };
+    // Travel distance is the actual overflow of the track past the pinned
+    // viewport, mirroring scrollWidth - clientWidth for a horizontal scroller.
+    const getDistance = () =>
+      Math.max(0, workFlex.scrollWidth - workSection.clientWidth);
 
     let scrollTween = gsap.to(workFlex, {
       x: () => -getDistance(),
@@ -80,13 +78,23 @@ const Work = () => {
       },
     });
 
-    // Handle re-calculation once images/DOM finish rendering
-    const onWindowLoad = () => ScrollTrigger.refresh();
-    window.addEventListener("load", onWindowLoad);
-    const timer = setTimeout(() => ScrollTrigger.refresh(), 500);
+    const refresh = () => ScrollTrigger.refresh();
+
+    // Project images load lazily and can shift `.work-flex`'s scrollWidth
+    // after mount, especially on mobile where layout settles later.
+    const images = Array.from(workFlex.querySelectorAll("img"));
+    images.forEach((img) => {
+      if (!img.complete) img.addEventListener("load", refresh, { once: true });
+    });
+
+    const resizeObserver = new ResizeObserver(refresh);
+    resizeObserver.observe(workFlex);
+
+    const timer = setTimeout(refresh, 500);
 
     return () => {
-      window.removeEventListener("load", onWindowLoad);
+      images.forEach((img) => img.removeEventListener("load", refresh));
+      resizeObserver.disconnect();
       clearTimeout(timer);
       scrollTween.kill();
       ScrollTrigger.getAll().forEach((t) => {

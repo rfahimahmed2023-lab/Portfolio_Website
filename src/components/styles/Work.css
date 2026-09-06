@@ -7,6 +7,7 @@
   background-color: #000;
   transition: 0s;
   will-change: transform;
+  touch-action: pan-y;
 }
 
 .work-section h2 {
@@ -31,12 +32,14 @@
 .work-flex {
   width: max-content;
   display: flex;
+  flex-wrap: nowrap;
   height: 100%;
   margin-left: -80px;
   padding-right: 120px;
   position: relative;
   border-top: 1px solid #363636;
   border-bottom: 1px solid #363636;
+  touch-action: pan-y;
 }
 
 .work-box {
