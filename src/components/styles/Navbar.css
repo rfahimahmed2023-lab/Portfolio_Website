@@ -4,6 +4,7 @@
   width: var(--cWidth);
   justify-content: space-between;
   padding: 20px 0px;
+  padding-top: max(20px, env(safe-area-inset-top));
   margin-bottom: -100px;
   box-sizing: border-box;
   position: fixed;

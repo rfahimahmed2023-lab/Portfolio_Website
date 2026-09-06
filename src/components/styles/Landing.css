@@ -356,3 +356,32 @@ h2.landing-info-h2 {
     font-size: 75px;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  /* Keep the hero headings clear of the character's face: push the intro
+     up near the top edge and the specialization text down near the
+     bottom edge instead of both hovering around vertical center. */
+  .landing-intro {
+    top: 4%;
+  }
+  .landing-intro h2 {
+    font-size: clamp(13px, 3.8vw, 18px);
+  }
+  .landing-intro h1 {
+    font-size: clamp(20px, 6.5vw, 30px);
+    line-height: 1.15;
+  }
+  .landing-info {
+    bottom: 16px;
+  }
+  .landing-info h3 {
+    font-size: clamp(13px, 3.5vw, 18px);
+  }
+  .landing-info h2 {
+    font-size: clamp(22px, 7vw, 35px);
+    line-height: 1.15;
+  }
+  h2.landing-info-h2 {
+    font-size: clamp(26px, 8vw, 38px);
+  }
+}

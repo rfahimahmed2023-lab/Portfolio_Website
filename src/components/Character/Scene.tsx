@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import setCharacter from "./utils/character";
 import setLighting from "./utils/lighting";
@@ -18,8 +18,6 @@ const Scene = () => {
   const hoverDivRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef(new THREE.Scene());
   const { setLoading } = useLoading();
-
-  const [character, setChar] = useState<THREE.Object3D | null>(null);
 
   useEffect(() => {
     if (canvasDiv.current) {
@@ -42,11 +40,20 @@ const Scene = () => {
       camera.position.z = 10;
       camera.position.set(0, 13.1, 24.7);
       camera.zoom = 1.1;
+      if (aspect < 1) {
+        // Portrait/mobile: a narrow horizontal FOV crops the character's
+        // sides at this distance, so widen the FOV and back the camera off
+        // to keep the full model in frame.
+        camera.fov = 22;
+        camera.position.set(0, 13.1, 32);
+        camera.zoom = 1;
+      }
       camera.updateProjectionMatrix();
 
       let headBone: THREE.Object3D | null = null;
       let screenLight: any | null = null;
       let mixer: THREE.AnimationMixer;
+      let onResize: (() => void) | undefined;
 
       const clock = new THREE.Clock();
 
@@ -60,7 +67,6 @@ const Scene = () => {
           hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
           mixer = animations.mixer;
           let character = gltf.scene;
-          setChar(character);
           scene.add(character);
           headBone = character.getObjectByName("spine006") || null;
           screenLight = character.getObjectByName("screenlight") || null;
@@ -70,9 +76,17 @@ const Scene = () => {
               animations.startIntro();
             }, 2500);
           });
-          window.addEventListener("resize", () =>
-            handleResize(renderer, camera, canvasDiv, character)
-          );
+          // Mobile browsers fire `resize` when the address bar shows/hides
+          // during scroll (height-only change). Rebuilding the camera
+          // timelines on every one of those tears down the pin mid-scroll,
+          // so only react to an actual width change.
+          let lastWidth = window.innerWidth;
+          onResize = () => {
+            if (window.innerWidth === lastWidth) return;
+            lastWidth = window.innerWidth;
+            handleResize(renderer, camera, canvasDiv, character);
+          };
+          window.addEventListener("resize", onResize);
         }
       });
 
@@ -131,9 +145,7 @@ const Scene = () => {
         clearTimeout(debounce);
         scene.clear();
         renderer.dispose();
-        window.removeEventListener("resize", () =>
-          handleResize(renderer, camera, canvasDiv, character!)
-        );
+        if (onResize) window.removeEventListener("resize", onResize);
         if (canvasDiv.current) {
           canvasDiv.current.removeChild(renderer.domElement);
         }

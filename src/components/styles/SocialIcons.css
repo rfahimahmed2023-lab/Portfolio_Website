@@ -81,6 +81,13 @@ div.resume-button span {
   width: 100%;
   z-index: 99999;
 }
+@media only screen and (max-width: 768px) {
+  /* The rotated vertical tab overlaps body copy in every section on
+     narrow screens; there's no room for a persistent side tab there. */
+  .resume-button {
+    display: none;
+  }
+}
 @media only screen and (min-width: 900px) {
   .social-icons {
     display: flex;
