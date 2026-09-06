@@ -26,6 +26,11 @@ export const LoadingProvider = ({ children }: PropsWithChildren) => {
   };
   useEffect(() => {}, [loading]);
 
+  useEffect(() => {
+    document.documentElement.style.overflow = isLoading ? "hidden" : "";
+    document.body.style.overflow = isLoading ? "hidden" : "";
+  }, [isLoading]);
+
   return (
     <LoadingContext.Provider value={value as LoadingType}>
       {isLoading && <Loading percent={loading} />}
